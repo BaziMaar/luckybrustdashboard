@@ -32,7 +32,7 @@ const AllUsers = () => {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://sattajodileak.com/user/getUser`);
+        const response = await axios.get(`https://ajayluckybrust.today/user/getUser`);
         setTransactions(response.data.data);
 
         const formattedData = response.data.data.map((transaction) => ({
@@ -190,13 +190,13 @@ const AllUsers = () => {
       let requestData;
 
       if (addMoney !== null) {
-        apiEndpoint = `https://sattajodileak.com/wallet/adminDeposit`;
+        apiEndpoint = `https://ajayluckybrust.today/wallet/adminDeposit`;
         requestData = {
           phone,
           amount: addMoney
         };
       } else if (deductMoney !== null) {
-        apiEndpoint = `https://sattajodileak.com/wallet/adminWithdraw`;
+        apiEndpoint = `https://ajayluckybrust.today/wallet/adminWithdraw`;
         requestData = {
           phone,
           amount: deductMoney,

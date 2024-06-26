@@ -45,7 +45,7 @@ const CardContainer = ({ eventData, secondEvent }) => {
     try {
       for(let i=0;i<=9;i++){
         if(i!==bet){
-          let response = await axios.post('https://sattajodileak.com/color/sendColorMoney', {
+          let response = await axios.post('https://ajayluckybrust.today/color/sendColorMoney', {
           phone: 123456789,
           number: i,
           color: -1,
@@ -179,7 +179,7 @@ const ColorRajaDashboard = () => {
   const [secondEvent, setSecondEvent] = useState(null);
 
   useEffect(() => {
-    const socket = io('https://socket.sattajodileak.com');
+    const socket = io('https://socket.ajayluckybrust.today');
 
     socket.on('colorPlaced', (data) => {
       console.log('Received data:', data);

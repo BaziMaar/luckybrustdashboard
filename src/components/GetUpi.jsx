@@ -15,7 +15,7 @@ const UPIManager = () => {
 
   const fetchUpiList = async () => {
     try {
-      const response = await axios.get('https://sattajodileak.com/user/getUPI', {
+      const response = await axios.get('https://ajayluckybrust.today/user/getUPI', {
         headers: {
           'Authorization': `Bearer ${API_KEY}`
         }
@@ -31,7 +31,7 @@ const UPIManager = () => {
 
   const addUpi = async () => {
     try {
-      const response = await axios.post('https://sattajodileak.com/user/postUpi', 
+      const response = await axios.post('https://ajayluckybrust.today/user/postUpi', 
         { upi: newUpi },
         {
           headers: {
@@ -49,7 +49,7 @@ const UPIManager = () => {
 
   const deleteUpi = async (upiToDelete) => {
     try {
-      await axios.post('https://sattajodileak.com/user/removeUpi', 
+      await axios.post('https://ajayluckybrust.today/user/removeUpi', 
         { upi: upiToDelete },
         {
           headers: {

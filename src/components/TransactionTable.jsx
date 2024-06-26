@@ -45,7 +45,7 @@ const TransactionTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://sattajodileak.com/wallet/getTrans`);
+        const response = await axios.get(`https://ajayluckybrust.today/wallet/getTrans`);
         setTransactions(response.data.wallets);
         const data = response.data.wallets.reduce((acc, user) => {
           return [
@@ -199,7 +199,7 @@ const TransactionTable = () => {
   };
   const fetchData = async () => {
     try {
-      const response = await axios.get(`https://sattajodileak.com/wallet/pendingTrans`);
+      const response = await axios.get(`https://ajayluckybrust.today/wallet/pendingTrans`);
       setTransactions(response.data.wallets);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -212,13 +212,13 @@ const TransactionTable = () => {
     alert(`Making payment for phone ${phone} with amount ${amount}. and status${status}.`);
 
     // Update status to 1 (Success
-    await axios.get(`https://sattajodileak.com/wallet/getTrans`);
+    await axios.get(`https://ajayluckybrust.today/wallet/getTrans`);
     await updateStatus(phone, amount, status,id);
     
   }
   const updateStatus=async(phone, amount, status,id)=> {
     // Make a POST request to update the status
-    fetch(`https://sattajodileak.com/wallet/updateStatus`, {
+    fetch(`https://ajayluckybrust.today/wallet/updateStatus`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

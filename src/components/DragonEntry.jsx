@@ -22,7 +22,7 @@ const DragonEntry = () => {
   const [sortModel, setSortModel] = useState([]);
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://sattajodileak.com/dragon/getDragonEntry');
+      const response = await axios.get('https://ajayluckybrust.today/dragon/getDragonEntry');
       const sortedData = response.data.reverse();
       setTransactions(sortedData);
       setData(sortedData);

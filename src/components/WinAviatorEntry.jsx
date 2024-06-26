@@ -22,7 +22,7 @@ const WinAviatorEntry = () => {
   const [sortModel, setSortModel] = useState([]);
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://sattajodileak.com/api/getAviatorEntry');
+      const response = await axios.get('https://ajayluckybrust.today/api/getAviatorEntry');
       const sortedData = response.data.reverse();
   
       // Filter entries where amount is greater than 0

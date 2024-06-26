@@ -22,7 +22,7 @@ const LuckyEntry = () => {
   const [sortModel, setSortModel] = useState([]);
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://sattajodileak.com/lucky/getLuckyEntry');
+      const response = await axios.get('https://ajayluckybrust.today/lucky/getLuckyEntry');
       const sortedData = response.data.reverse();
       setTransactions(sortedData);
       setData(sortedData);

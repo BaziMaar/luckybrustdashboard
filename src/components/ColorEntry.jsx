@@ -22,7 +22,7 @@ const ColorEntry = () => {
   const [sortModel, setSortModel] = useState([]);
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://sattajodileak.com/color/getColorEntry');
+      const response = await axios.get('https://ajayluckybrust.today/color/getColorEntry');
       const sortedData = response.data.reverse();
       setTransactions(sortedData);
       setData(sortedData);
