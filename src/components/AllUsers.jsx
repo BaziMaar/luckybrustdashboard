@@ -60,7 +60,7 @@ const AllUsers = () => {
           phone: transaction.phone,
           email: transaction.email,
           wallet: transaction.wallet.toFixed(2),
-          withdrawal_amount: Math.abs(transaction.withdrawal_amount).toFixed(2),
+          withdrawal_amount: Math.abs(transaction.withdrwarl_amount).toFixed(2),
           referred_wallet: Math.abs(transaction.referred_wallet).toFixed(2),
           created_at: moment(transaction.createdAt).format('YYYY-MM-DD'),
           referred_users: transaction.refer_id,
