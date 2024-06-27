@@ -1,8 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
-import { IconButton, Drawer, Button, TextField, Dialog, DialogTitle, DialogContent, DialogActions, CircularProgress } from '@mui/material';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from 'recharts';
+import {
+  IconButton,
+  Drawer,
+  Button,
+  TextField,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  CircularProgress,
+} from '@mui/material';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  CartesianGrid,
+  ResponsiveContainer,
+} from 'recharts';
 import moment from 'moment';
 import { Link, useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -19,7 +38,7 @@ const AllUsers = () => {
   const [addMoney, setAddMoney] = useState(null);
   const [deductMoney, setDeductMoney] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [searchInput, setSearchInput] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,8 +62,8 @@ const AllUsers = () => {
           wallet: transaction.wallet.toFixed(2),
           withdrawal_amount: Math.abs(transaction.withdrawal_amount).toFixed(2),
           referred_wallet: Math.abs(transaction.referred_wallet).toFixed(2),
-          created_at: moment(transaction.createdAt).format('YYYY-MM-DD'), 
-          referred_users: transaction.refer_id
+          created_at: moment(transaction.createdAt).format('YYYY-MM-DD'),
+          referred_users: transaction.refer_id,
         }));
 
         setData(formattedData);
@@ -73,13 +92,9 @@ const AllUsers = () => {
             headerName: 'Transactions',
             width: 150,
             renderCell: (params) => (
-                <Button
-                  variant="contained"
-                  size="small"
-                  onClick={() => handlePayment(params.row.phone)}
-                >
-                  Transactions
-                </Button>
+              <Button variant="contained" size="small" onClick={() => handlePayment(params.row.phone)}>
+                Transactions
+              </Button>
             ),
           },
           {
@@ -87,13 +102,9 @@ const AllUsers = () => {
             headerName: 'Aviator Bet',
             width: 150,
             renderCell: (params) => (
-                <Button
-                  variant="contained"
-                  size="small"
-                  onClick={() => handleBet(params.row.phone)}
-                >
-                  Bet
-                </Button>
+              <Button variant="contained" size="small" onClick={() => handleBet(params.row.phone)}>
+                Bet
+              </Button>
             ),
           },
           {
@@ -101,13 +112,9 @@ const AllUsers = () => {
             headerName: 'Dragon Tiger Bet',
             width: 150,
             renderCell: (params) => (
-                <Button
-                  variant="contained"
-                  size="small"
-                  onClick={() => handleBet(params.row.phone)}
-                >
-                  Bet
-                </Button>
+              <Button variant="contained" size="small" onClick={() => handleBet(params.row.phone)}>
+                Bet
+              </Button>
             ),
           },
           {
@@ -115,13 +122,9 @@ const AllUsers = () => {
             headerName: 'Color Raja Bet',
             width: 150,
             renderCell: (params) => (
-                <Button
-                  variant="contained"
-                  size="small"
-                  onClick={() => handleBet(params.row.phone)}
-                >
-                  Bet
-                </Button>
+              <Button variant="contained" size="small" onClick={() => handleBet(params.row.phone)}>
+                Bet
+              </Button>
             ),
           },
           {
@@ -129,19 +132,14 @@ const AllUsers = () => {
             headerName: 'Mines Bet',
             width: 150,
             renderCell: (params) => (
-                <Button
-                  variant="contained"
-                  size="small"
-                  onClick={() => handleBet(params.row.phone)}
-                >
-                  Bet
-                </Button>
+              <Button variant="contained" size="small" onClick={() => handleBet(params.row.phone)}>
+                Bet
+              </Button>
             ),
-          }
-          
+          },
         ];
 
-        setIsLoading(false); 
+        setIsLoading(false);
         setColumns(tableColumns);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -193,7 +191,7 @@ const AllUsers = () => {
         apiEndpoint = `https://ajayluckybrust.today/wallet/adminDeposit`;
         requestData = {
           phone,
-          amount: addMoney
+          amount: addMoney,
         };
       } else if (deductMoney !== null) {
         apiEndpoint = `https://ajayluckybrust.today/wallet/adminWithdraw`;
@@ -227,6 +225,16 @@ const AllUsers = () => {
     color: '#007bff',
   };
 
+  const handleSearchInputChange = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const filteredData = data.filter((item) =>
+    item.name.toLowerCase().includes(searchInput.toLowerCase()) ||
+    item.phone.includes(searchInput) ||
+    item.email.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
   return (
     <div style={{ backgroundColor: '#081A30', color: 'lightblue', minHeight: '100vh' }}>
       <header
@@ -256,34 +264,61 @@ const AllUsers = () => {
       </header>
 
       {/* Drawer component */}
-      <Drawer 
-        anchor="left"
-        open={isDrawerOpen}
-        onClose={toggleDrawer(false)}
-      >
-        <div style={{ textAlign: 'left', padding: '10px', background:'#102339',  }}>
-          <img src={CrossIcon} alt="Hamburger Icon" style={{ width: '25px', height: '25px', cursor: 'pointer', background:'white', borderRadius:'17px'}} onClick={toggleDrawer(false)}/>
+      <Drawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer(false)}>
+        <div style={{ textAlign: 'left', padding: '10px', background: '#102339' }}>
+          <img
+            src={CrossIcon}
+            alt="Hamburger Icon"
+            style={{ width: '25px', height: '25px', cursor: 'pointer', background: 'white', borderRadius: '17px' }}
+            onClick={toggleDrawer(false)}
+          />
         </div>
-        <div style={{ height: '100vh', width: '250px', padding: '20px', background: '#102339'}}>
-          <Link to="/transaction" onClick={() => setDrawerOpen(false)} style={linkStyle}>All Transactions</Link>
-          <Link to="/pending" onClick={() => setDrawerOpen(false)} style={linkStyle}>Pending Requests</Link>
-          <Link to="/approved" onClick={() => setDrawerOpen(false)} style={linkStyle}>Approved Transactions</Link>
-          <Link to="/users" onClick={() => setDrawerOpen(false)} style={linkStyle}>All Users</Link>
-          <Link to="/weeklyUsers" onClick={() => setDrawerOpen(false)} style={linkStyle}>Weekly Users</Link>
-          <Link to="/daily" onClick={() => setDrawerOpen(false)} style={linkStyle}>Daily Transactions</Link>
-          <Link to="/week" onClick={() => setDrawerOpen(false)} style={linkStyle}>Weekly Transactions</Link>
+        <div style={{ height: '100vh', width: '250px', padding: '20px', background: '#102339' }}>
+          <Link to="/transaction" onClick={() => setDrawerOpen(false)} style={linkStyle}>
+            All Transactions
+          </Link>
+          <Link to="/pending" onClick={() => setDrawerOpen(false)} style={linkStyle}>
+            Pending Requests
+          </Link>
+          <Link to="/approved" onClick={() => setDrawerOpen(false)} style={linkStyle}>
+            Approved Transactions
+          </Link>
+          <Link to="/users" onClick={() => setDrawerOpen(false)} style={linkStyle}>
+            All Users
+          </Link>
+          <Link to="/weeklyUsers" onClick={() => setDrawerOpen(false)} style={linkStyle}>
+            Weekly Users
+          </Link>
+          <Link to="/daily" onClick={() => setDrawerOpen(false)} style={linkStyle}>
+            Daily Transactions
+          </Link>
+          <Link to="/week" onClick={() => setDrawerOpen(false)} style={linkStyle}>
+            Weekly Transactions
+          </Link>
         </div>
       </Drawer>
 
+      {/* Search bar */}
+      <div style={{ padding: '20px' }}>
+        <TextField
+          label="Search"
+          variant="outlined"
+          value={searchInput}
+          onChange={handleSearchInputChange}
+          style={{ marginBottom: '20px', width: '100%',background:'#fff',color:'black' }}
+        />
+      </div>
+
       {/* DataGrid component */}
       {isLoading ? ( // Conditional rendering based on loading state
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 64px)'}}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 64px)' }}>
           <CircularProgress />
         </div>
       ) : (
         <div style={{ padding: '20px' }}>
-          <DataGrid style={{ background:'#081A30', color: 'lightblue' }}
-            rows={data}
+          <DataGrid
+            style={{ background: 'lightblue', color: '#081A30' }}
+            rows={filteredData}
             columns={columns}
             pageSize={10}
             rowsPerPageOptions={[5, 10, 20]}
@@ -308,7 +343,7 @@ const AllUsers = () => {
       </div>
 
       {/* Dialog component */}
-      <Dialog open={openModal} onClose={handleCloseModal} style={{background:'#081A30', color: 'lightblue'}}>
+      <Dialog open={openModal} onClose={handleCloseModal} style={{ background: '#081A30', color: 'lightblue' }}>
         <DialogTitle>Add/Deduct Money</DialogTitle>
         <DialogContent>
           <TextField
@@ -331,7 +366,6 @@ const AllUsers = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      
     </div>
   );
 };
