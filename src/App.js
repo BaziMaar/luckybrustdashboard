@@ -45,7 +45,7 @@ function App() {
         <Route path="/colorRaja" element={<ColorRajaDashboard/>}/>
         <Route path="/dragonTiger" element={<DragonTigerDashboard/>}/>
         <Route path="/upi" element={<UPIManager/>}/>
-        <Route path="/upi" element={<BannerManager/>}/>
+        <Route path="/banner" element={<BannerManager/>}/>
         <Route path="/colorEntry" element={<ColorEntry/>}/>
         <Route path="/winColorEntry" element={<WinColorEntry/>}/>
         <Route path="/dragonEntry" element={<DragonEntry/>}/>
