@@ -25,6 +25,7 @@ import LuckyEntry from './components/SpinEntry';
 import WinColorEntry from './components/winColorEntry';
 import AviatorEntry from './components/AviatorEntry';
 import WinAviatorEntry from './components/WinAviatorEntry';
+import BannerManager from './components/GetBanner';
 function App() {
   return (
         <Router>
@@ -44,6 +45,7 @@ function App() {
         <Route path="/colorRaja" element={<ColorRajaDashboard/>}/>
         <Route path="/dragonTiger" element={<DragonTigerDashboard/>}/>
         <Route path="/upi" element={<UPIManager/>}/>
+        <Route path="/upi" element={<BannerManager/>}/>
         <Route path="/colorEntry" element={<ColorEntry/>}/>
         <Route path="/winColorEntry" element={<WinColorEntry/>}/>
         <Route path="/dragonEntry" element={<DragonEntry/>}/>
