@@ -166,15 +166,16 @@ const Home = () => {
               <h2>UPI</h2>
               <p>all UPI : 3</p>
               </StyledCard>
-              <StyledCard   onClick={() => goToCardWindow('banner')} gradient="linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)">
-              <h2>Banner</h2>
-              <p>all Banner : 2</p>
-              </StyledCard>
+
           </div>
           <div style={{ textAlign: 'center', fontFamily: 'monospace', fontSize: 'large', paddingBottom: '20px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)', color: '#333' }}>
             
           </div>
           <div className="dashboard">
+          <StyledCard   onClick={() => goToCardWindow('banner')} gradient="linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)">
+              <h2>Banner</h2>
+              <p>all Banner : 2</p>
+              </StyledCard>
             <StyledCard onClick={() => goToCardWindow('approved')} gradient="linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)">
               <h2>Approved Transaction</h2>
               <p>Total : {totalUsers}</p>
