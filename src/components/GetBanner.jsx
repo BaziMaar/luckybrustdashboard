@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './UPIManager.css';
+import './BannerManager.css';
 
 const BannerManager = () => {
   const [upiList, setUpiList] = useState([]);
@@ -20,7 +20,7 @@ const BannerManager = () => {
           'Authorization': `Bearer ${API_KEY}`
         }
       });
-      setUpiList(response.data);
+      setUpiList(response.data); // Assuming response.data.banners is the array of banner URLs
       setLoading(false);
     } catch (error) {
       console.error('Error fetching UPI list:', error);
@@ -31,7 +31,7 @@ const BannerManager = () => {
 
   const addUpi = async () => {
     try {
-      const response = await axios.post('https://ajayluckybrust.today/user/postBanner', 
+      await axios.post('https://ajayluckybrust.today/user/postBanner', 
         { banner: newUpi },
         {
           headers: {
@@ -39,8 +39,9 @@ const BannerManager = () => {
           }
         }
       );
-      alert(`${newUpi}  new banner added successfully`)
+      alert(`${newUpi} new banner added successfully`);
       setNewUpi('');
+      fetchUpiList(); // Re-fetch the list to include the new banner
     } catch (error) {
       console.error('Error adding Banner:', error);
       setError('Error adding Banner.');
@@ -57,7 +58,7 @@ const BannerManager = () => {
           }
         }
       );
-      alert(`${upiToDelete}  deleted successfully`)
+      alert(`${upiToDelete} deleted successfully`);
       setUpiList(upiList.filter(upi => upi !== upiToDelete));
     } catch (error) {
       console.error('Error deleting UPI:', error);
@@ -82,14 +83,14 @@ const BannerManager = () => {
         />
         <button onClick={addUpi}>Add Banner</button>
       </div>
-      <ul>
+      <div className="banner-list">
         {upiList.map((upi, index) => (
-          <li key={upi.id || index}>
-            {upi}
+          <div key={index} className="banner-item">
+            <img src={upi} alt={`Banner ${index + 1}`} />
             <button onClick={() => deleteUpi(upi)}>Delete</button>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
