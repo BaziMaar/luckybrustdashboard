@@ -26,6 +26,10 @@ import WinColorEntry from './components/winColorEntry';
 import AviatorEntry from './components/AviatorEntry';
 import WinAviatorEntry from './components/WinAviatorEntry';
 import BannerManager from './components/GetBanner';
+import AviatorBets from './components/AvaitorBets';
+import DragonBets from './components/DragonBets';
+import LuckyBets from './components/LuckyBets';
+import ColorBets from './components/ColorBets';
 function App() {
   return (
         <Router>
@@ -54,6 +58,10 @@ function App() {
         <Route path="/spinEntry" element={<LuckyEntry/>}/>
         <Route path="/aviatorEntry" element={<AviatorEntry/>}/>
         <Route path="/winAviatorEntry" element={<WinAviatorEntry/>}/>
+        <Route path="/aviatorBets/:phone" element={<AviatorBets/>}/>
+        <Route path="/luckyBets/:phone" element={<LuckyBets/>}/>
+        <Route path="/dragonBets/:phone" element={<DragonBets/>}/>
+        <Route path="/colorBets/:phone" element={<ColorBets/>}/>
       </Routes>
     </Router>
   );

@@ -23,7 +23,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import moment from 'moment';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import CrossIcon from '../assets/cross.svg';
 
@@ -39,7 +39,6 @@ const AllUsers = () => {
   const [deductMoney, setDeductMoney] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [searchInput, setSearchInput] = useState('');
-  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
@@ -112,7 +111,7 @@ const AllUsers = () => {
             headerName: 'Dragon Tiger Bet',
             width: 150,
             renderCell: (params) => (
-              <Button variant="contained" size="small" onClick={() => handleBet(params.row.phone)}>
+              <Button variant="contained" size="small" onClick={() => handleDragonBet(params.row.phone)}>
                 Bet
               </Button>
             ),
@@ -137,6 +136,16 @@ const AllUsers = () => {
               </Button>
             ),
           },
+          {
+            field: 'luckyBetButton',
+            headerName: 'Lucky Bet',
+            width: 150,
+            renderCell: (params) => (
+              <Button variant="contained" size="small" onClick={() => handleLuckyBet(params.row.phone)}>
+                Bet
+              </Button>
+            ),
+          },
         ];
 
         setIsLoading(false);
@@ -150,11 +159,23 @@ const AllUsers = () => {
   }, []);
 
   const handleBet = (phone) => {
-    navigate(`/bet/${phone}`);
+    window.open(`/aviatorBets/${phone}`, '_blank');
+  };
+
+  const handleLuckyBet = (phone) => {
+    window.open(`/luckyBets/${phone}`, '_blank');
+  };
+
+  const handleDragonBet = (phone) => {
+    window.open(`/dragonBets/${phone}`, '_blank');
+  };
+
+  const handleColorBet = (phone) => {
+    window.open(`/colorBets/${phone}`, '_blank');
   };
 
   const handlePayment = (phone) => {
-    navigate(`/history/${phone}`);
+    window.open(`/history/${phone}`, '_blank');
   };
 
   const handleOpenModal = (phone) => {
@@ -250,67 +271,76 @@ const AllUsers = () => {
         }}
       >
         <IconButton
-          color="inherit"
-          aria-label="open drawer"
           onClick={toggleDrawer(true)}
           edge="start"
-          sx={{ mr: 2 }}
+          style={{ marginRight: '10px', color: 'lightblue' }}
+          aria-label="menu"
         >
           <MenuIcon />
         </IconButton>
-        <div style={{ marginLeft: '6in' }}>
-          <h2 style={{ color: 'lightblue' }}>All Users</h2>
-        </div>
+        <h1 style={{ flex: 1 }}>Admin Dashboard</h1>
+        <Button
+          onClick={() => {
+            localStorage.clear();
+            window.location.href = '/';
+          }}
+          style={{
+            backgroundColor: '#e91e63',
+            color: 'white',
+            borderRadius: '20px',
+            padding: '8px 16px',
+            fontWeight: 'bold',
+          }}
+        >
+          Logout
+        </Button>
       </header>
 
-      {/* Drawer component */}
       <Drawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer(false)}>
         <div style={{ textAlign: 'left', padding: '10px', background: '#102339' }}>
           <img
             src={CrossIcon}
-            alt="Hamburger Icon"
+            alt="Close Icon"
             style={{ width: '25px', height: '25px', cursor: 'pointer', background: 'white', borderRadius: '17px' }}
             onClick={toggleDrawer(false)}
           />
         </div>
         <div style={{ height: '100vh', width: '250px', padding: '20px', background: '#102339' }}>
-          <Link to="/transaction" onClick={() => setDrawerOpen(false)} style={linkStyle}>
+          <Link to="/transaction" target="_blank" onClick={() => setDrawerOpen(false)} style={linkStyle}>
             All Transactions
           </Link>
-          <Link to="/pending" onClick={() => setDrawerOpen(false)} style={linkStyle}>
+          <Link to="/pending" target="_blank" onClick={() => setDrawerOpen(false)} style={linkStyle}>
             Pending Requests
           </Link>
-          <Link to="/approved" onClick={() => setDrawerOpen(false)} style={linkStyle}>
+          <Link to="/approved" target="_blank" onClick={() => setDrawerOpen(false)} style={linkStyle}>
             Approved Transactions
           </Link>
-          <Link to="/users" onClick={() => setDrawerOpen(false)} style={linkStyle}>
+          <Link to="/users" target="_blank" onClick={() => setDrawerOpen(false)} style={linkStyle}>
             All Users
           </Link>
-          <Link to="/weeklyUsers" onClick={() => setDrawerOpen(false)} style={linkStyle}>
+          <Link to="/weeklyUsers" target="_blank" onClick={() => setDrawerOpen(false)} style={linkStyle}>
             Weekly Users
           </Link>
-          <Link to="/daily" onClick={() => setDrawerOpen(false)} style={linkStyle}>
+          <Link to="/daily" target="_blank" onClick={() => setDrawerOpen(false)} style={linkStyle}>
             Daily Transactions
           </Link>
-          <Link to="/week" onClick={() => setDrawerOpen(false)} style={linkStyle}>
+          <Link to="/week" target="_blank" onClick={() => setDrawerOpen(false)} style={linkStyle}>
             Weekly Transactions
           </Link>
         </div>
       </Drawer>
 
-      {/* Search bar */}
       <div style={{ padding: '20px' }}>
         <TextField
           label="Search"
           variant="outlined"
           value={searchInput}
           onChange={handleSearchInputChange}
-          style={{ marginBottom: '20px', width: '100%',background:'#fff',color:'black' }}
+          style={{ marginBottom: '20px', width: '100%', background: '#fff', color: 'black' }}
         />
       </div>
 
-      {/* DataGrid component */}
-      {isLoading ? ( // Conditional rendering based on loading state
+      {isLoading ? (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 64px)' }}>
           <CircularProgress />
         </div>
@@ -326,7 +356,6 @@ const AllUsers = () => {
         </div>
       )}
 
-      {/* Chart component */}
       <div style={{ padding: '20px' }}>
         <ResponsiveContainer width="100%" height={400}>
           <BarChart data={data}>
@@ -342,7 +371,6 @@ const AllUsers = () => {
         </ResponsiveContainer>
       </div>
 
-      {/* Dialog component */}
       <Dialog open={openModal} onClose={handleCloseModal} style={{ background: '#081A30', color: 'lightblue' }}>
         <DialogTitle>Add/Deduct Money</DialogTitle>
         <DialogContent>
@@ -351,6 +379,7 @@ const AllUsers = () => {
             type="number"
             value={addMoney}
             onChange={handleAddMoneyChange}
+            style={{ marginBottom: '20px' }}
           />
           <TextField
             label="Deduct Money"
