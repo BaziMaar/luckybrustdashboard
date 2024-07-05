@@ -30,6 +30,8 @@ import AviatorBets from './components/AvaitorBets';
 import DragonBets from './components/DragonBets';
 import LuckyBets from './components/LuckyBets';
 import ColorBets from './components/ColorBets';
+import ReferredDetails from './components/ReferredDetails';
+import MinesBets from './components/MinesBets';
 function App() {
   return (
         <Router>
@@ -62,6 +64,8 @@ function App() {
         <Route path="/luckyBets/:phone" element={<LuckyBets/>}/>
         <Route path="/dragonBets/:phone" element={<DragonBets/>}/>
         <Route path="/colorBets/:phone" element={<ColorBets/>}/>
+        <Route path="/referred/:phone" element={<ReferredDetails/>}/>
+        <Route path="/minesBets/:phone" element={<MinesBets/>}/>
       </Routes>
     </Router>
   );
